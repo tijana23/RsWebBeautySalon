@@ -35,10 +35,12 @@
                 @Html.DisplayFor(modelItem => item.TelephoneNumber)
             </td>
             <td>
-                <a asp-action="History" asp-route-id="@item.Id">History</a> |
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="History" asp-route-id="@item.Id">History | </a> 
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit | </a> 
+                    <a asp-action="Details" asp-route-id="@item.Id">Details | </a> 
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>}
             </td>
         </tr>
 }

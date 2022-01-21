@@ -17,20 +17,61 @@ namespace BeautySalonT.Models
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var UserManager = serviceProvider.GetRequiredService<UserManager<BeautySalonTUser>>();
             IdentityResult roleResult;
+
             //Add Admin Role
+
             var roleCheck = await RoleManager.RoleExistsAsync("Admin");
             if (!roleCheck) { roleResult = await RoleManager.CreateAsync(new IdentityRole("Admin")); }
-            BeautySalonTUser user = await UserManager.FindByEmailAsync("admin@final.com");
+
+            BeautySalonTUser user = await UserManager.FindByEmailAsync("admin@beautysalont.com");
             if (user == null)
             {
                 var User = new BeautySalonTUser();
-                User.Email = "admin@final.com";
-                User.UserName = "admin@final.com";
+                User.Email = "admin@beautysalont.com";
+                User.UserName = "admin@beautysalont.com";
                 string userPWD = "Admin123";
                 IdentityResult chkUser = await UserManager.CreateAsync(User, userPWD);
                 //Add default User to Role Admin
                 if (chkUser.Succeeded) { var result1 = await UserManager.AddToRoleAsync(User, "Admin"); }
             }
+
+            roleCheck = await RoleManager.RoleExistsAsync("Employee");
+            if (!roleCheck)
+            {
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Employee"));
+            }
+            user = await UserManager.FindByEmailAsync("marijam@beautysalont.com");
+            if (user == null)
+            {
+                var User = new BeautySalonTUser();
+                User.Email = "marijam@beautysalont.com";
+                User.UserName = "marijam@beautysalont.com";
+                User.EmployeeId = 1;
+                string userPWD = "Marija123";
+                IdentityResult chkUser = await UserManager.CreateAsync(User, userPWD);
+                if (chkUser.Succeeded) { var result1 = await UserManager.AddToRoleAsync(User, "Employee"); }
+            }
+
+            //Add Client Role
+            roleCheck = await RoleManager.RoleExistsAsync("Client");
+            if (!roleCheck)
+            {
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Client"));
+            }
+
+            user = await UserManager.FindByEmailAsync("tijanan@beautysalont.com");
+            if (user == null)
+            {
+                var User = new BeautySalonTUser();
+                User.Email = "tijanan@beautysalont.com";
+                User.UserName = "tijanan@beautysalont.com";
+                User.ClientId = 1;
+                string userPWD = "Tijana123";
+                IdentityResult chkUser = await UserManager.CreateAsync(User, userPWD);
+                if (chkUser.Succeeded) { var result1 = await UserManager.AddToRoleAsync(User, "Client"); }
+            }
+
+
         }
 
         public static void Initialize(IServiceProvider serviceProvider)
@@ -129,7 +170,7 @@ namespace BeautySalonT.Models
 
                         ServiceId = context.Service.Single(t => t.Title == "Blow Dry").Id,
                         ClientId = context.Client.Single(t => t.FirstName == "Tijana" && t.LastName == "Nastevska").Id,
-                        Time = "15 minutes",
+                        Time = "15:00",
                         Date = DateTime.Parse("2021-9-02"),
                     },
                     new Appointment
@@ -137,7 +178,7 @@ namespace BeautySalonT.Models
 
                         ServiceId = context.Service.Single(t => t.Title == "Basic Tint").Id,
                         ClientId = context.Client.Single(t => t.FirstName == "Nadica" && t.LastName == "Trajkovska").Id,
-                        Time = "12 minutes",
+                        Time = "12:45",
                         Date = DateTime.Parse("2021-9-02"),
                     },
                     new Appointment
@@ -145,7 +186,7 @@ namespace BeautySalonT.Models
 
                         ServiceId = context.Service.Single(t => t.Title == "Perms").Id,
                         ClientId = context.Client.Single(t => t.FirstName == "Marija" && t.LastName == "Malevska").Id,
-                        Time = "45 minutes",
+                        Time = "11:30",
                         Date = DateTime.Parse("2021-9-02"),
                     }
 

@@ -9,5 +9,8 @@ namespace BeautySalonT.Areas.Identity.Data
     // Add profile data for application users by adding properties to the BeautySalonTUser class
     public class BeautySalonTUser : IdentityUser
     {
+        public int? ClientId { get; set; }
+
+        public int? EmployeeId { get; set; }
     }
 }

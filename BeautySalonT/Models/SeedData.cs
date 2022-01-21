@@ -90,21 +90,24 @@ namespace BeautySalonT.Models
                     {
                         FirstName = "Tijana",
                         LastName = "Nastevska",
-                        TelephoneNumber = 077526325
+                        TelephoneNumber = 077526325,
+                        ProfilePicture = "c53761de-51a7-48ae-bf79-ae4fd47fa2f0_Anna_Asberg_UK_Photo-our people.jpg"
 
                     },
                     new Client
                     {
                         FirstName = "Nadica",
                         LastName = "Trajkovska",
-                        TelephoneNumber = 075687798
+                        TelephoneNumber = 075687798,
+                        ProfilePicture = "2cec8bb3-3ff1-44c8-a670-b9dce20de7e9_dana-maor_profile_1536x1152.webp"
 
                     },
                     new Client
                     {
                         FirstName = "Marija",
                         LastName = "Malevska",
-                        TelephoneNumber = 077526325
+                        TelephoneNumber = 077526325,
+                        ProfilePicture = "47ee389c-56d2-442e-9fff-4468ea0c9a9d_IMG_1849.webp"
 
                     }
 
@@ -141,7 +144,8 @@ namespace BeautySalonT.Models
                         SSN = "2108988455631",
                         Licence = "Yes",
                         OfficeNumber = 2775343,
-                        HireDate = DateTime.Parse("2019-1-01")
+                        HireDate = DateTime.Parse("2019-1-01"),
+                        ProfilePicture= "d5d0148c-7973-45a1-894f-ee0f4d6a5782_nice-positive-woman-yellow-background-portrait-emotion-163675981.jpg"
                     },
                     new Employee
                     {
@@ -150,7 +154,9 @@ namespace BeautySalonT.Models
                         SSN = "0306997455032",
                         Licence = "Yes",
                         OfficeNumber = 2775342,
-                        HireDate = DateTime.Parse("2020-5-06")
+                        HireDate = DateTime.Parse("2020-5-06"),
+                        ProfilePicture= "166a1f3c-27ed-4b7e-9f9d-bc6c0e867793_416x416.jpg"
+
                     },
                     new Employee
                     {
@@ -159,7 +165,8 @@ namespace BeautySalonT.Models
                         SSN = "1504993455021",
                         Licence = "Yes",
                         OfficeNumber = 2775341,
-                        HireDate = DateTime.Parse("2018-9-04")
+                        HireDate = DateTime.Parse("2018-9-04"),
+                        ProfilePicture = "1d66e907-b95d-4ea2-8f90-a6c17c40b9d1_Depositphotos_11884169_original.jpg"
                     }
                 );
                 context.SaveChanges();

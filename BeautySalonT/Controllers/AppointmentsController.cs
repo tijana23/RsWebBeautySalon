@@ -49,7 +49,7 @@ namespace BeautySalonT.Controllers
         // GET: Appointments/Create
         public IActionResult Create()
         {
-            ViewData["ClientId"] = new SelectList(_context.Set<Client>(), "Id", "Fullname");
+            ViewData["ClientId"] = new SelectList(_context.Set<Client>(), "Id", "FullName");
             ViewData["ServiceId"] = new SelectList(_context.Set<Service>(), "Id", "Title");
             return View();
         }
@@ -67,7 +67,7 @@ namespace BeautySalonT.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClientId"] = new SelectList(_context.Set<Client>(), "Id", "Fullname", appointment.ClientId);
+            ViewData["ClientId"] = new SelectList(_context.Set<Client>(), "Id", "FullName", appointment.ClientId);
             ViewData["ServiceId"] = new SelectList(_context.Set<Service>(), "Id", "Title", appointment.ServiceId);
             return View(appointment);
         }
@@ -85,7 +85,7 @@ namespace BeautySalonT.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClientId"] = new SelectList(_context.Set<Client>(), "Id", "Fullname", appointment.ClientId);
+            ViewData["ClientId"] = new SelectList(_context.Set<Client>(), "Id", "FullName", appointment.ClientId);
             ViewData["ServiceId"] = new SelectList(_context.Set<Service>(), "Id", "Title", appointment.ServiceId);
             return View(appointment);
         }
@@ -122,7 +122,7 @@ namespace BeautySalonT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClientId"] = new SelectList(_context.Set<Client>(), "Id", "Fullname", appointment.ClientId);
+            ViewData["ClientId"] = new SelectList(_context.Set<Client>(), "Id", "FullName", appointment.ClientId);
             ViewData["ServiceId"] = new SelectList(_context.Set<Service>(), "Id", "Title", appointment.ServiceId);
             return View(appointment);
         }

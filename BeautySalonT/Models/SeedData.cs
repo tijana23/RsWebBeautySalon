@@ -1,4 +1,6 @@
-﻿using BeautySalonT.Data;
+﻿using BeautySalonT.Areas.Identity.Data;
+using BeautySalonT.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -10,10 +12,33 @@ namespace BeautySalonT.Models
 {
     public class SeedData
     {
+        public static async Task CreateUserRole(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<BeautySalonTUser>>();
+            IdentityResult roleResult;
+            //Add Admin Role
+            var roleCheck = await RoleManager.RoleExistsAsync("Admin");
+            if (!roleCheck) { roleResult = await RoleManager.CreateAsync(new IdentityRole("Admin")); }
+            BeautySalonTUser user = await UserManager.FindByEmailAsync("admin@final.com");
+            if (user == null)
+            {
+                var User = new BeautySalonTUser();
+                User.Email = "admin@final.com";
+                User.UserName = "admin@final.com";
+                string userPWD = "Admin123";
+                IdentityResult chkUser = await UserManager.CreateAsync(User, userPWD);
+                //Add default User to Role Admin
+                if (chkUser.Succeeded) { var result1 = await UserManager.AddToRoleAsync(User, "Admin"); }
+            }
+        }
+
         public static void Initialize(IServiceProvider serviceProvider)
         {
             using (var context = new BeautySalonTContext(serviceProvider.GetRequiredService<DbContextOptions<BeautySalonTContext>>()))
             {
+                CreateUserRole(serviceProvider).Wait();
+
 
                 if (context.Client.Any() || context.Service.Any() || context.Employee.Any())
                 {

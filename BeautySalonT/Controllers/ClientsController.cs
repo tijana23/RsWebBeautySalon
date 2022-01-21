@@ -27,6 +27,13 @@ namespace BeautySalonT.Controllers
         {
             return View(await _context.Client.ToListAsync());
         }
+        public async Task<IActionResult> History(int id)
+        {
+            IQueryable<Appointment> appointments = _context.Appointment.Where(s=>s.ClientId== id);
+            appointments=appointments.Include(a => a.Client).Include(a => a.Service);
+
+            return View(await appointments.ToListAsync());
+        }
 
         // GET: Clients/Details/5
         public async Task<IActionResult> Details(int? id)
